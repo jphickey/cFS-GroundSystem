@@ -23,6 +23,7 @@ import mmap
 import socket
 from collections import namedtuple
 
+import getpass
 
 class MiniCmdUtil:
     # Class objects
@@ -61,7 +62,7 @@ class MiniCmdUtil:
         self.parameters = parameters
         self.payload = bytearray()
         self.packet = bytearray()
-        with open("/tmp/OffsetData", "r+b") as f:
+        with open(f"/tmp/OffsetData-{getpass.getuser()}", "r+b") as f:
             self.mm = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
 
         self.cmd_offset_pri = 0

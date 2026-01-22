@@ -33,6 +33,8 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QHeaderView, QPushButton,
 
 from UiTelemetrysystemdialog import UiTelemetrysystemdialog
 
+import getpass
+
 ROOTDIR = Path(sys.argv[0]).resolve().parent
 
 
@@ -151,7 +153,7 @@ class TSTlmReceiver(QThread):
         # Init zeroMQ
         context = zmq.Context()
         self.subscriber = context.socket(zmq.SUB)
-        self.subscriber.connect("ipc:///tmp/GroundSystem")
+        self.subscriber.connect(f"ipc:///tmp/GroundSystem-{getpass.getuser()}")
         self.subscriber.setsockopt_string(zmq.SUBSCRIBE, subscr)
 
     def run(self):
