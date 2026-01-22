@@ -1,9 +1,9 @@
 # !/usr/bin/env python3
 
 #
-#  NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+#  NASA Docket No. GSC-19,200-1, and identified as "cFS Draco"
 #
-#  Copyright (c) 2020 United States Government as represented by the
+#  Copyright (c) 2023 United States Government as represented by the
 #  Administrator of the National Aeronautics and Space Administration.
 #  All Rights Reserved.
 #
@@ -61,6 +61,8 @@ from PyQt5.QtWidgets import QApplication, QDialog
 
 from UiEventmessagedialog import UiEventmessagedialog
 
+import getpass
+
 ROOTDIR = Path(sys.argv[0]).resolve().parent
 
 
@@ -77,7 +79,7 @@ class EventMessageTelemetry(QDialog, UiEventmessagedialog):
             4: "CRITICAL"
         }
 
-        with open("/tmp/OffsetData", "r+b") as f:
+        with open(f"/tmp/OffsetData-{getpass.getuser()}", "r+b") as f:
             self.mm = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
 
     def init_em_tlm_receiver(self, subscr):
@@ -141,7 +143,7 @@ class EMTlmReceiver(QThread):
         # Init zeroMQ
         self.context = zmq.Context()
         self.subscriber = self.context.socket(zmq.SUB)
-        self.subscriber.connect("ipc:///tmp/GroundSystem")
+        self.subscriber.connect(f"ipc:///tmp/GroundSystem-{getpass.getuser()}")
         subscription_string = f"{subscr}.Spacecraft1.TelemetryPackets.{app_id}"
         self.subscriber.setsockopt_string(zmq.SUBSCRIBE, subscription_string)
 

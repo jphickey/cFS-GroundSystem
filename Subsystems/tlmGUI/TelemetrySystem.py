@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 #
-#  NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+#  NASA Docket No. GSC-19,200-1, and identified as "cFS Draco"
 #
-#  Copyright (c) 2020 United States Government as represented by the
+#  Copyright (c) 2023 United States Government as represented by the
 #  Administrator of the National Aeronautics and Space Administration.
 #  All Rights Reserved.
 #
@@ -32,6 +32,8 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QHeaderView, QPushButton,
                              QTableWidgetItem)
 
 from UiTelemetrysystemdialog import UiTelemetrysystemdialog
+
+import getpass
 
 ROOTDIR = Path(sys.argv[0]).resolve().parent
 
@@ -151,7 +153,7 @@ class TSTlmReceiver(QThread):
         # Init zeroMQ
         context = zmq.Context()
         self.subscriber = context.socket(zmq.SUB)
-        self.subscriber.connect("ipc:///tmp/GroundSystem")
+        self.subscriber.connect(f"ipc:///tmp/GroundSystem-{getpass.getuser()}")
         self.subscriber.setsockopt_string(zmq.SUBSCRIBE, subscr)
 
     def run(self):

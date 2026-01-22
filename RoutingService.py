@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 #
-#  NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+#  NASA Docket No. GSC-19,200-1, and identified as "cFS Draco"
 #
-#  Copyright (c) 2020 United States Government as represented by the
+#  Copyright (c) 2023 United States Government as represented by the
 #  Administrator of the National Aeronautics and Space Administration.
 #  All Rights Reserved.
 #
@@ -25,8 +25,10 @@ from time import sleep
 import zmq
 from PyQt5.QtCore import QThread, pyqtSignal
 
+import getpass
+
 # Receive port where the CFS TO_Lab app sends the telemetry packets
-udp_recv_port = 1235
+udp_recv_port = 2234
 
 
 #
@@ -51,7 +53,7 @@ class RoutingService(QThread):
         # Init zeroMQ
         self.context = zmq.Context()
         self.publisher = self.context.socket(zmq.PUB)
-        self.publisher.bind("ipc:///tmp/GroundSystem")
+        self.publisher.bind(f"ipc:///tmp/GroundSystem-{getpass.getuser()}")
 
     # Run thread
     def run(self):

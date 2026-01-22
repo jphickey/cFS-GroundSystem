@@ -1,7 +1,7 @@
 #
-#  NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+#  NASA Docket No. GSC-19,200-1, and identified as "cFS Draco"
 #
-#  Copyright (c) 2020 United States Government as represented by the
+#  Copyright (c) 2023 United States Government as represented by the
 #  Administrator of the National Aeronautics and Space Administration.
 #  All Rights Reserved.
 #
@@ -17,15 +17,15 @@
 #
 
 # Development Build Macro Definitions
-_cFS_GrndSys_build_number = 18
-_cFS_GrndSys_build_baseline = "7.2"
-_cFS_GrndSys_build_dev_baseline = "equuleus-rc1"
-_cFS_GrndSys_build_dev_cycle = "equuleus-rc2"
-_cFS_GrndSys_build_codename = "Equuleus"
+_cFS_GrndSys_build_number = 0
+_cFS_GrndSys_build_baseline = "7.0"
+_cFS_GrndSys_build_dev_baseline = "v7.0.0"
+_cFS_GrndSys_build_dev_cycle = "v7.0.0"
+_cFS_GrndSys_build_codename = "Draco"
 
 # Version Number Definitions see doxygen docs for definitions
-_cFS_GrndSys_MAJOR = 2 # Major version number 
-_cFS_GrndSys_MINOR = 1 # Minor version number 
+_cFS_GrndSys_MAJOR = 7 # Major version number 
+_cFS_GrndSys_MINOR = 0 # Minor version number 
 _cFS_GrndSys_REVISION = 0 # Revision version number 
 
 
@@ -34,7 +34,7 @@ _cFS_GrndSys_REVISION = 0 # Revision version number
 # Reserved for mission use to denote patches/customizations as needed.
 # Values 1-254 are reserved for mission use to denote patches/customizations as # needed. NOTE: Reserving 0 and 0xFF for cFS open-source development use 
 # (pending resolution of nasa/cFS#440)
-_cFS_GrndSys_MISSIONREV = 255
+_cFS_GrndSys_MISSIONREV = 0
 
 # Development Build format for __version__
 # Baseline git tag + Number of commits since baseline

@@ -1,9 +1,9 @@
 # !/usr/bin/env python3
 
 #
-#  NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+#  NASA Docket No. GSC-19,200-1, and identified as "cFS Draco"
 #
-#  Copyright (c) 2020 United States Government as represented by the
+#  Copyright (c) 2023 United States Government as represented by the
 #  Administrator of the National Aeronautics and Space Administration.
 #  All Rights Reserved.
 #
@@ -24,6 +24,7 @@ import sys
 import os
 import signal
 import pathlib
+import getpass
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
@@ -163,7 +164,7 @@ class GroundSystem(QMainWindow, UiMainWindow):
     def save_offsets(self):
         offsets = bytes((self.sb_tlm_offset.value(), self.sb_cmd_offset_pri.value(),
                          self.sb_cmd_offset_sec.value()))
-        with open("/tmp/OffsetData", "wb") as f:
+        with open(f"/tmp/OffsetData-{getpass.getuser()}", "wb") as f:
             f.write(offsets)
 
     # Update the combo box list in gui
